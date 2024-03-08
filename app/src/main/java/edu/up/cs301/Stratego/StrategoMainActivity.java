@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.Stratego;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
-public class CounterMainActivity extends GameMainActivity {
+public class StrategoMainActivity extends GameMainActivity {
 	
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
@@ -38,19 +38,19 @@ public class CounterMainActivity extends GameMainActivity {
 		// a human player player type (player type 0)
 		playerTypes.add(new GamePlayerType("Local Human Player") {
 			public GamePlayer createPlayer(String name) {
-				return new CounterHumanPlayer(name);
+				return new StrategoHumanPlayer(name);
 			}});
 		
 		// a computer player type (player type 1)
 		playerTypes.add(new GamePlayerType("Computer Player") {
 			public GamePlayer createPlayer(String name) {
-				return new CounterComputerPlayer1(name);
+				return new StrategoComputerPlayer1(name);
 			}});
 		
 		// a computer player type (player type 2)
 		playerTypes.add(new GamePlayerType("Computer Player (GUI)") {
 			public GamePlayer createPlayer(String name) {
-				return new CounterComputerPlayer2(name);
+				return new StrategoComputerPlayer2(name);
 			}});
 
 		// Create a game configuration class for Counter:
@@ -83,8 +83,8 @@ public class CounterMainActivity extends GameMainActivity {
 	 */
 	@Override
 	public LocalGame createLocalGame(GameState state) {
-		if (state == null) state = new CounterState(0);
-		return new CounterLocalGame(state);
+		if (state == null) state = new StrategoState(0);
+		return new StrategoLocalGame(state);
 	}
 
 }

@@ -10,7 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
-import edu.up.cs301.counter.R;
+import edu.up.cs301.Stratego.R;
 
 /**
  * Helper-class for showing dialog boxes

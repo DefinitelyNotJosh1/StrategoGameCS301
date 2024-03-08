@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CounterGame"
+rootProject.name = "StrategoGameCS301"
 include(":app")

@@ -34,7 +34,7 @@ import edu.up.cs301.GameFramework.utilities.IPCoder;
 import edu.up.cs301.GameFramework.utilities.Logger;
 import edu.up.cs301.GameFramework.utilities.MessageBox;
 import edu.up.cs301.GameFramework.utilities.Saving;
-import edu.up.cs301.counter.R;
+import edu.up.cs301.Stratego.R;
 
 /**
  * class GameMainActivity
