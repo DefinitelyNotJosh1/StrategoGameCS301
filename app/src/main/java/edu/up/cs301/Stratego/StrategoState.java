@@ -17,11 +17,10 @@ public class StrategoState extends GameState {
 	
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
-	
-	// the value of the counter
-	private int counter;
+
 
 	/* TODO: add Stratego instance variables */
+	private int gamePhase; // an int signifying if we're in the place pieces phase or playing the game
 	private boolean isRedCaptured;
 	private boolean isBlueCaptured;
 	private boolean isRedVisible;
@@ -30,20 +29,33 @@ public class StrategoState extends GameState {
 
 	/* Indiana though this might be useful for keeping
 	* track of each teams' pieces... unsure */
-	private List<Piece> redPieces = new ArrayList<Piece>();
-	private List<Piece> bluePieces = new ArrayList<Piece>();
+	//Josh - changed List<Piece> to ArrayList<Piece> to get rid of syntax errors in getters/setters
+	private ArrayList<Piece> redPieces = new ArrayList<Piece>();
+	private ArrayList<Piece> bluePieces = new ArrayList<Piece>();
 	private boolean isRedReady;
 	private boolean isBlueReady;
 
+	// Josh - figured we should store a "Board" object that has all the piece data - Board Class
+	// could also include arrayLists of available pieces, as well as which pieces are captured
+	private Board board = new Board();
+
+	// Josh - could use a 2d Array to signify whether each piece is visible or not - another option
+	// is to make the current 2d int array to show position of game pieces a 3d array, with the third slot
+	// containing a 0, 1, or 2, signifying if the pieces are visible to red, blue, or both - should
+	// make for less hassle
+
+
+
 	
 	/**
-	 * constructor, initializing the counter value from the parameter
-	 * 
-	 * @param counterVal
-	 * 		the value to which the counter's value should be initialized
+	 * Josh - crude constructor idea
 	 */
-	public StrategoState(int counterVal) {
-		counter = counterVal;
+	public StrategoState(Board initBoard, boolean initIsRedReady, boolean initIsBlueReady,
+						 int initPlayerTurn) {
+		initBoard = this.board;
+		initIsRedReady = this.isRedReady;
+		initIsBlueReady = this.isBlueReady;
+		initPlayerTurn = this.playerTurn;
 	}
 	
 	/**
@@ -53,8 +65,7 @@ public class StrategoState extends GameState {
 	 * 		the object from which the copy should be made
 	 */
 	public StrategoState(StrategoState orig) {
-		// set the counter to that of the original
-		this.counter = orig.counter;
+
 
 		this.isRedCaptured = orig.isRedCaptured;
 		this.isBlueCaptured = orig.isBlueCaptured;
@@ -65,6 +76,8 @@ public class StrategoState extends GameState {
 		this.bluePieces = orig.bluePieces;
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
+		this.board = new Board(this.board);
+
 	}
 
 	public boolean getIsRedCaptured() {return isRedCaptured;}

@@ -45,7 +45,8 @@ public class StrategoLocalGame extends LocalGame {
 	public StrategoLocalGame(GameState state) {
 		// initialize the game state, with the counter value starting at 0
 		if (! (state instanceof StrategoState)) {
-			state = new StrategoState(0);
+			//TODO: WILL CHANGE LATER
+			state = new StrategoState(new Board(), false,false,0);
 		}
 		this.gameState = (StrategoState)state;
 		super.state = state;
@@ -63,9 +64,6 @@ public class StrategoLocalGame extends LocalGame {
 			// cast so that we Java knows it's a CounterMoveAction
 			StrategoMoveAction cma = (StrategoMoveAction)action;
 
-			// Update the counter values based upon the action
-			int result = gameState.getCounter() + (cma.isPlus() ? 1 : -1);
-			gameState.setCounter(result);
 			
 			// denote that this was a legal/successful move
 			return true;
@@ -97,30 +95,8 @@ public class StrategoLocalGame extends LocalGame {
 	 */
 	@Override
 	protected String checkIfGameOver() {
-		
-		// get the value of the counter
-		int counterVal = this.gameState.getCounter();
-		
-		if (counterVal >= TARGET_MAGNITUDE) {
-			// counter has reached target magnitude, so return message that
-			// player 0 has won.
-			return playerNames[0]+" has won.";
-		}
-		else if (counterVal <= -TARGET_MAGNITUDE) {
-			// counter has reached negative of target magnitude; if there
-			// is a second player, return message that this player has won,
-			// otherwise that the first player has lost
-			if (playerNames.length >= 2) {
-				return playerNames[1]+" has won.";
-			}
-			else {
-				return playerNames[0]+" has lost.";
-			}
-		}else {
-			// game is still between the two limit: return null, as the game
-			// is not yet over
-			return null;
-		}
+		//empty, our game doesn't use counters
+		return null;
 
 	}
 

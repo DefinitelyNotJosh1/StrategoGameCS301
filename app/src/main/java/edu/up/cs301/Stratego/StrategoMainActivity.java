@@ -83,7 +83,7 @@ public class StrategoMainActivity extends GameMainActivity {
 	 */
 	@Override
 	public LocalGame createLocalGame(GameState state) {
-		if (state == null) state = new StrategoState(0);
+		if (state == null) state = new StrategoState(new Board(), false,false,0); //TODO: WILL CHANGE LATER
 		return new StrategoLocalGame(state);
 	}
 
