@@ -21,17 +21,13 @@ public class StrategoState extends GameState {
 
 	/* TODO: add Stratego instance variables */
 	private int gamePhase; // an int signifying if we're in the place pieces phase or playing the game
-	private boolean isRedCaptured;
-	private boolean isBlueCaptured;
-	private boolean isRedVisible;
-	private boolean isBlueVisible;
-	private int playerTurn;
+	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
+	private int[][] isVisible; // 0 for player 1, 1 for player 2, 2 for both
+	private int playerTurn; // 0 for player 1, 1 for player 2
 
 	/* Indiana though this might be useful for keeping
 	* track of each teams' pieces... unsure */
 	//Josh - changed List<Piece> to ArrayList<Piece> to get rid of syntax errors in getters/setters
-	private ArrayList<Piece> redPieces = new ArrayList<Piece>();
-	private ArrayList<Piece> bluePieces = new ArrayList<Piece>();
 	private boolean isRedReady;
 	private boolean isBlueReady;
 
@@ -43,6 +39,7 @@ public class StrategoState extends GameState {
 	// is to make the current 2d int array to show position of game pieces a 3d array, with the third slot
 	// containing a 0, 1, or 2, signifying if the pieces are visible to red, blue, or both - should
 	// make for less hassle
+
 
 
 
