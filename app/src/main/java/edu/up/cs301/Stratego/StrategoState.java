@@ -1,6 +1,7 @@
 package edu.up.cs301.Stratego;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.up.cs301.GameFramework.infoMessage.GameState;
@@ -108,4 +109,17 @@ public class StrategoState extends GameState {
 	public boolean getIsBlueReady() {return isBlueReady;}
 
 	public void setIsBlueReady(boolean isReady) {this.isBlueReady = isReady;}
+
+	@Override
+	public String toString() {
+		return "StrategoState{" +
+				"gamePhase=" + this.gamePhase +
+				", isCaptured=" + this.isCaptured +
+				", isVisible=" + Arrays.toString(this.isVisible) +
+				", playerTurn=" + this.playerTurn +
+				", isRedReady=" + this.isRedReady +
+				", isBlueReady=" + this.isBlueReady +
+				", board=" + this.board +
+				'}';
+	}
 }
