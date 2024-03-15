@@ -11,7 +11,6 @@ public class Board {
 
     // Basic copy constructor for strategoState compiling
     public Board(Board orig) {
-
         this.testInt = orig.testInt;
     }
     //empty for now

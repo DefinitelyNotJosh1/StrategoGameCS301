@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 // Object to keep track of captured pieces
 public class CapturedPieces {
-    private ArrayList<Piece> redPieces = new ArrayList<Piece>();
-    private ArrayList<Piece> bluePieces = new ArrayList<Piece>();
+    public ArrayList<Piece> redPieces = new ArrayList<Piece>();
+    public ArrayList<Piece> bluePieces = new ArrayList<Piece>();
 
 }
