@@ -1,8 +1,5 @@
 package edu.up.cs301.Stratego;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 
@@ -24,10 +21,6 @@ public class StrategoState extends GameState {
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
 	private int[][] isVisible; // 0 for player 1, 1 for player 2, 2 for both
 	private int playerTurn; // 0 for player 1, 1 for player 2
-
-	/* Indiana though this might be useful for keeping
-	* track of each teams' pieces... unsure */
-	//Josh - changed List<Piece> to ArrayList<Piece> to get rid of syntax errors in getters/setters
 	private boolean isRedReady;
 	private boolean isBlueReady;
 
@@ -43,13 +36,14 @@ public class StrategoState extends GameState {
 
 
 
-	
+
 	/**
 	 * Josh - crude constructor idea
 	 */
 	public StrategoState(Board initBoard, boolean initIsRedReady, boolean initIsBlueReady,
 						 int initPlayerTurn) {
-		initBoard = this.board;
+
+		this.board = this.initBoard;
 		initIsRedReady = this.isRedReady;
 		initIsBlueReady = this.isBlueReady;
 		initPlayerTurn = this.playerTurn;
@@ -62,44 +56,24 @@ public class StrategoState extends GameState {
 	 * 		the object from which the copy should be made
 	 */
 	public StrategoState(StrategoState orig) {
-
-
-		this.isRedCaptured = orig.isRedCaptured;
-		this.isBlueCaptured = orig.isBlueCaptured;
-		this.isRedVisible = orig.isRedVisible;
-		this.isBlueVisible = orig.isBlueVisible;
+		this.gamePhase = orig.gamePhase;
+		this.isCaptured = orig.isCaptured;
+		this.isVisible = orig.isVisible;
 		this.playerTurn = orig.playerTurn;
-		this.redPieces = orig.redPieces;
-		this.bluePieces = orig.bluePieces;
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
-		this.board = new Board(this.board);
-
+		this.board = new Board(orig.board);
 	}
 
-	public boolean getIsRedCaptured() {return isRedCaptured;}
+	public int getGamePhase() {return gamePhase;}
 
-	public void setIsRedCaptured(boolean isCapt) {this.isRedCaptured = isCapt;}
+	public int setGamePhase(int phase) {this.gamePhase = phase;}
 
-	public boolean getIsBlueCaptured() {return isBlueCaptured;}
+	public int getIsCaptured() {return isCaptured;}
 
-	public void setIsBlueCaptured(boolean isCapt) {this.isBlueCaptured = isCapt;}
-
-	public boolean getIsRedVisible() {return isRedVisible;}
-
-	public void setIsRedVisible(boolean isVis) {this.isRedVisible = isVis;}
-
-	public boolean getIsBlueVisible() {return isBlueVisible;}
-
-	public void setIsBlueVisible(boolean isVis) {this.isBlueVisible = isVis;}
-
-	public ArrayList<Piece> getRedPieces() {return redPieces;}
-
-	public void setRedPieces(ArrayList<Piece> red) {this.redPieces = red;}
-
-	public ArrayList<Piece> getBluePieces() {return bluePieces;}
-
-	public void setBluePieces(ArrayList<Piece> blue) {this.bluePieces = blue;}
+	public int setIsCaptured(int capt) {this.isCaptured = capt;}
+	public int[][] getIsVisible() {return isVisible;}
+	public void setIsVisible(int[][] vis) {this.isVisible = vis;}
 
 	public boolean getIsRedReady() {return isRedReady;}
 
@@ -108,4 +82,8 @@ public class StrategoState extends GameState {
 	public boolean getIsBlueReady() {return isBlueReady;}
 
 	public void setIsBlueReady(boolean isReady) {this.isBlueReady = isReady;}
+	public int getPlayerTurn() {return playerTurn;}
+	public void setPlayerTurn(int turn) {this.playerTurn = turn;}
+	public Board getBoard() {return board;}
+	public void setBoard(Board board) {this.board = new Board(board);}
 }
