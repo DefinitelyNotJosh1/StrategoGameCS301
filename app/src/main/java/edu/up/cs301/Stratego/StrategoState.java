@@ -1,5 +1,10 @@
 package edu.up.cs301.Stratego;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +26,7 @@ public class StrategoState extends GameState {
 
 
 	/* TODO: add Stratego instance variables */
-	private int gamePhase; // an int signifying if we're in the place pieces phase or playing the game
+	private int gamePhase; // 0 for players placing pieces, 1 for gameplay
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
 	private int[][] isVisible; // 0 for player 1, 1 for player 2, 2 for both
 	private int playerTurn; // 0 for player 1, 1 for player 2
@@ -31,17 +36,24 @@ public class StrategoState extends GameState {
 	//Josh - changed List<Piece> to ArrayList<Piece> to get rid of syntax errors in getters/setters
 	private boolean isRedReady;
 	private boolean isBlueReady;
-
-	// Josh - figured we should store a "Board" object that has all the piece data - Board Class
-	// could also include arrayLists of available pieces, as well as which pieces are captured
-	private Board board = new Board();
+	private Board board; // has piece objects that themselves say which player they're visible to
+	private CapturedPieces capturedPieces;
 
 	// Josh - could use a 2d Array to signify whether each piece is visible or not - another option
 	// is to make the current 2d int array to show position of game pieces a 3d array, with the third slot
 	// containing a 0, 1, or 2, signifying if the pieces are visible to red, blue, or both - should
 	// make for less hassle
 
+	public StrategoState() {
+		gamePhase = 0;
+		isCaptured = 0;
+		playerTurn = 1;
+		isRedReady = false;
+		isBlueReady = false;
+		board = new Board();
+		capturedPieces = new CapturedPieces();
 
+	}
 
 
 
@@ -68,6 +80,8 @@ public class StrategoState extends GameState {
 		this.isCaptured = orig.isCaptured;
 		this.isVisible = orig.isVisible;
 		this.playerTurn = orig.playerTurn;
+		this.redPieces = orig.redPieces;
+		this.bluePieces = orig.bluePieces;
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
 		this.board = new Board(orig.board);

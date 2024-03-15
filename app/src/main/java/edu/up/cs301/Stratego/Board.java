@@ -1,5 +1,6 @@
 package edu.up.cs301.Stratego;
 
+
 public class Board {
     private int testInt;
 
