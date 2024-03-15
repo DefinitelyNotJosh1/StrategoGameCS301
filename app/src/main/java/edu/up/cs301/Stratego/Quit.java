@@ -11,5 +11,6 @@ public class Quit extends GameAction {
      */
     public Quit(GamePlayer player) {
         super(player);
+
     }
 }

@@ -25,30 +25,37 @@ public class StrategoLocalGame extends LocalGame {
 
 	// the game's state
 	private StrategoState gameState;
+	private StrategoMainActivity mainActivity;
 	
 	/**
 	 * can this player move
 	 * 
 	 * @return
-	 * 		true, because all player are always allowed to move at all times,
-	 * 		as this is a fully asynchronous game
+	 * 		true if the action is done while its the player's turn or if its starting state
 	 */
 	@Override
 	protected boolean canMove(int playerIdx) {
-		return true;
+		if (gameState.getGamePhase() == 0) {
+			return true;
+		}
+		if (gameState.getPlayerId() == playerIdx) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 * This ctor should be called when a new counter game is started
 	 */
-	public StrategoLocalGame(GameState state) {
-		// initialize the game state, with the counter value starting at 0
+	public StrategoLocalGame(GameState state, StrategoMainActivity initMainActivity) {
+		// initialize the game state
 		if (! (state instanceof StrategoState)) {
 			//TODO: WILL CHANGE LATER
-			state = new StrategoState(new Board(), false,false,0);
+			state = new StrategoState();
 		}
 		this.gameState = (StrategoState)state;
 		super.state = state;
+		mainActivity = initMainActivity;
 	}
 
 	/**
@@ -56,21 +63,27 @@ public class StrategoLocalGame extends LocalGame {
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
-		Log.i("action", action.getClass().toString());
-		
-		if (action instanceof StrategoMoveAction) {
-		
-			// cast so that we Java knows it's a CounterMoveAction
-			StrategoMoveAction cma = (StrategoMoveAction)action;
 
-			
-			// denote that this was a legal/successful move
+		if (action instanceof Ready) {
+			switch (gameState.getPlayerId()) { // which ID the player is
+				case 0:
+					gameState.setIsBlueReady(true);
+					break;
+				case 1:
+					gameState.setIsRedReady(true);
+					break;
+			}
 			return true;
 		}
-		else {
-			// denote that this was an illegal move
-			return false;
+		else if (action instanceof Quit) {
+				gameState.setGamePhase(2);
+				return true;
 		}
+		else if (action instanceof MovePiece) {
+
+
+		}
+		return false;
 	}//makeMove
 	
 	/**

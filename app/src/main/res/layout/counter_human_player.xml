@@ -48,5 +48,10 @@
             android:text="0"
             android:textSize="50sp" />
     </LinearLayout>
+    <edu.up.cs301.Stratego.Board
+        android:id="@+id/gameBoard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
