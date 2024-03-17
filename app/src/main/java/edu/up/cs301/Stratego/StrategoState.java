@@ -23,9 +23,8 @@ public class StrategoState extends GameState {
 	
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
-
-	private ArrayList<Integer> redPieces = new ArrayList<Integer>(); // captured red pieces
-	private ArrayList<Integer> bluePieces = new ArrayList<Integer>(); // captured blue piece
+	private ArrayList<Integer> redPieces; // captured red pieces
+	private ArrayList<Integer> bluePieces; // captured blue piece
 	private int playerId; // 0 for player 1, 1 for player 2
 	private int gamePhase; // 0 for players placing pieces, 1 for gameplay, 2 for game over
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
@@ -51,6 +50,8 @@ public class StrategoState extends GameState {
 		board = new int[8][10]; // [row][col]
 
 		capturedPieces = new CapturedPieces();
+		bluePieces = new ArrayList<Integer>();
+		redPieces = new ArrayList<Integer>();
 
 	}
 
@@ -69,6 +70,8 @@ public class StrategoState extends GameState {
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
 		this.board = new int[8][10]; // [row][col]
+		this.bluePieces = new ArrayList<Integer>(orig.bluePieces);
+		this.redPieces = new ArrayList<Integer>(orig.redPieces);
 	}
 
 	//get value of a piece in the array
@@ -118,6 +121,31 @@ public class StrategoState extends GameState {
 	}
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
+	}
+
+	public ArrayList<Integer> getRedPieces() {
+		return new ArrayList<Integer>(this.redPieces);
+	}
+
+	public void setRedPieces(ArrayList<Integer> redPieces) {
+		this.redPieces = new ArrayList<Integer>(redPieces);
+	}
+
+	public ArrayList<Integer> getBluePieces() {
+		return new ArrayList<Integer>(this.bluePieces);
+	}
+
+	public void setBluePieces(ArrayList<Integer> bluePieces) {
+		this.bluePieces = new ArrayList<Integer>(bluePieces);
+	}
+
+	public void capturePiece(int playerId, int targetedPiece) {
+		if (playerId == 0) {
+			bluePieces.add(targetedPiece);
+		}
+		else if (playerId == 1) {
+			redPieces.add(targetedPiece);
+		}
 	}
 
 	@Override
