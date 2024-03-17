@@ -59,7 +59,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 	 */
 	protected void updateDisplay() {
 		// set the text in the appropriate widget
-		counterValueTextView.setText("" + state.getCounter());
+		//counterValueTextView.setText("" + state.getCounter());
 	}
 
 	/**

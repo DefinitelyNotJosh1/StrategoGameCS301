@@ -91,13 +91,14 @@ public class Board extends SurfaceView {
         for (int col = 0; col < WIDTH_CELLS; col++) {
             for (int row = 0; row < HEIGHT_CELLS; row++) {
 
-                drawBoardInfo(boardInfo[col][row], canvas, col, row);
+                //drawBoardInfo(boardInfo[col][row], canvas, col, row);
             }
         }
     }
 
     //draws the pieces depending on the info given - made so any int can work, not stuck
     //only using a 2d int array
+    /*
     public void drawBoardInfo(int pieceVal, Canvas canvas, int col, int row) {
         switch (pieceVal) {
             case 0:
@@ -142,7 +143,7 @@ public class Board extends SurfaceView {
     }
 
     //draw helper
-    public void drawBoardHelper(Canvas canvas, Bitmap bitmap, int col, int row) {
+    //public void drawBoardHelper(Canvas canvas, Bitmap bitmap, int col, int row) {
         canvas.drawBitmap(bitmap,(dpWidth/WIDTH_CELLS) * col + 25, (dpHeight/HEIGHT_CELLS) * row + 5, null);
     }
 

@@ -81,10 +81,10 @@ public class StrategoMainActivity extends GameMainActivity {
 	 * @return
 	 * 		the local game, a counter game
 	 */
+
 	@Override
 	public LocalGame createLocalGame(GameState state) {
 		if (state == null) state = new StrategoState();
 		return new StrategoLocalGame(state);
 	}
-
 }

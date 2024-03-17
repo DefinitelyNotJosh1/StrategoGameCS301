@@ -61,9 +61,10 @@ public class StrategoLocalGame extends LocalGame {
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
+		int playerId = gameState.getPlayerId(); // which ID the player is
 
 		if (action instanceof Ready) {
-			switch (gameState.getPlayerId()) { // which ID the player is
+			switch (playerId) {
 				case 0:
 					gameState.setIsBlueReady(true);
 					break;
@@ -77,7 +78,9 @@ public class StrategoLocalGame extends LocalGame {
 				gameState.setGamePhase(2);
 				return true;
 		}
-		else if (action instanceof MovePiece) {
+		else if (action instanceof MovePiece) { //TODO: implement method that only allows pieces to move 1 unit unless a scout, and no diagonal
+			//TODO: change red and blue assigned values within board array, update interactions as such
+			//TODO: implement method that disallows out of bounds movement
 			MovePiece mp = (MovePiece)action;
 			int row = mp.getRow();
 			int col = mp.getCol();
@@ -85,21 +88,41 @@ public class StrategoLocalGame extends LocalGame {
 			int destCol = mp.getDestCol();
 			int piece = gameState.getPiece(row,col);
 			int targetedPiece = gameState.getPiece(destRow,destCol);
+			if (piece == 0 || piece == 11) {
+				return false;
+			}
 
 			if (targetedPiece == -1) { // move piece if spot is empty
 				gameState.setPiece(destRow, destCol, row, col, piece);
+				return true;
 			}
 			else if (piece > targetedPiece) { // if attacker is greater, take previous piece
-				gameState
+				gameState.capturePiece(playerId,targetedPiece);
 				gameState.setPiece(destRow,destCol,row,col, piece);
+				return true;
 			}
 			else if (targetedPiece > piece) { // delete piece that attacked if its opponent is greater
-				gameState.setPiece(row, col, row, col, -1);
-
+				if (targetedPiece == 10 && piece == 1) { // if a spy is attacking a 10
+					gameState.capturePiece(playerId,targetedPiece);
+					gameState.setPiece(destRow,destCol,row,col, piece);
+					return true;
+				}
+				else if (targetedPiece == 11 && piece == 3) { // if a miner is attacking a bomb
+					gameState.capturePiece(playerId,targetedPiece);
+					gameState.setPiece(destRow,destCol,row,col, piece);
+					return true;
+				}
+				else if (playerId == 0) {
+					gameState.capturePiece(1,piece);
+					gameState.setPiece(row, col, row, col, -1);
+					return true;
+				}
+				else if (playerId == 1) {
+					gameState.capturePiece(0,piece);
+					gameState.setPiece(row, col, row, col, -1);
+					return true;
+				}
 			}
-
-
-
 		}
 		return false;
 	}//makeMove

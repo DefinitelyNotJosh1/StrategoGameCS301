@@ -23,15 +23,14 @@ public class StrategoState extends GameState {
 	
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
-	private ArrayList<Integer> redPieces; // captured red pieces
-	private ArrayList<Integer> bluePieces; // captured blue piece
+	private ArrayList<Integer> redPieces; // pieces red has captured
+	private ArrayList<Integer> bluePieces; // pieces blue has captured
 	private int playerId; // 0 for player 1, 1 for player 2
 	private int gamePhase; // 0 for players placing pieces, 1 for gameplay, 2 for game over
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
 	private int[][] isVisible; // 0 for player 1, 1 for player 2, 2 for both
 	private boolean isRedReady;
 	private boolean isBlueReady;
-	private CapturedPieces capturedPieces;
 	private StrategoMainActivity mainActivity;
 	public int[][] board;
 
@@ -48,8 +47,6 @@ public class StrategoState extends GameState {
 		isRedReady = false;
 		isBlueReady = false;
 		board = new int[8][10]; // [row][col]
-
-		capturedPieces = new CapturedPieces();
 		bluePieces = new ArrayList<Integer>();
 		redPieces = new ArrayList<Integer>();
 
