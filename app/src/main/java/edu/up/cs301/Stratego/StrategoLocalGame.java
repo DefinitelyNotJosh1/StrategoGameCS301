@@ -6,6 +6,8 @@ import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import android.util.Log;
 
+import java.io.Serializable;
+
 /**
  * A class that represents the state of a game. In our counter game, the only
  * relevant piece of information is the value of the game's counter. The
@@ -15,7 +17,7 @@ import android.util.Log;
  * @author Andrew M. Nuxoll
  * @version July 2013
  */
-public class StrategoLocalGame extends LocalGame {
+public class StrategoLocalGame extends LocalGame implements Serializable {
 
 	// When a counter game is played, any number of players. The first player
 	// is trying to get the counter value to TARGET_MAGNITUDE; the second player,
@@ -84,7 +86,7 @@ public class StrategoLocalGame extends LocalGame {
 				gameState.setGamePhase(2);
 				return true;
 		}
-		else if (action instanceof MovePiece) { //TODO: implement method that only allows pieces to move 1 unit unless a scout, and no diagonal
+		else if (action instanceof MovePiece) {
 
 			//declaring variables here to make logic easier
 			MovePiece mp = (MovePiece)action;
@@ -106,8 +108,9 @@ public class StrategoLocalGame extends LocalGame {
 				return false;
 			}
 
+			//return false if flag or bomb
 			if (pieceVal == 0 || pieceVal == 11) {
-				return false; // can't move a flag or bomb
+				return false;
 			}
 
 			//return false if the destination spot is illegal for most pieces

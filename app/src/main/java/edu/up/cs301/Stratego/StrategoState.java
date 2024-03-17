@@ -99,7 +99,8 @@ public class StrategoState extends GameState {
 	}
 
 	// adds pieces to the captured pieces ArrayList
-	//TODO: please update these to arrayLists of pieces isntead of arrayLists of ints, update the copy constructor if need be
+	//TODO: please update these to arrayLists of pieces isntead of arrayLists of ints,
+	// update the copy constructor if need be. Could also just do 1 ArrayList instead
 	public void capturePiece(int playerId, int targetedPiece) {
 		if (playerId == 0) {
 			bluePieces.add(targetedPiece);
