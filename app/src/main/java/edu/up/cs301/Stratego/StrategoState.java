@@ -32,7 +32,7 @@ public class StrategoState extends GameState {
 	private boolean isRedReady;
 	private boolean isBlueReady;
 	private StrategoMainActivity mainActivity;
-	public int[][] board;
+	public Piece[][] board;
 
 
 	// Josh - could use a 2d Array to signify whether each piece is visible or not - another option
@@ -46,7 +46,7 @@ public class StrategoState extends GameState {
 		playerId = 1;
 		isRedReady = false;
 		isBlueReady = false;
-		board = new int[8][10]; // [row][col]
+		board = new Piece[8][10]; // [row][col]
 		bluePieces = new ArrayList<Integer>();
 		redPieces = new ArrayList<Integer>();
 
@@ -66,34 +66,48 @@ public class StrategoState extends GameState {
 		this.playerId = orig.playerId;
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
-		this.board = new int[8][10]; // [row][col]
+		this.board = new Piece[8][10]; // [row][col]
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[col].length; col++) {
+				this.board[row][col] = new Piece(orig.board[row][col]); // replace all pieces with new pieces for network play
+			}
+		}
 		this.bluePieces = new ArrayList<Integer>(orig.bluePieces);
 		this.redPieces = new ArrayList<Integer>(orig.redPieces);
 	}
 
 	//get value of a piece in the array
 	public int getPiece(int row, int col) {
-		// if we're out of bounds or anything, return -2;
-		if (board == null || row < 0 || col < 0) return -2;
-		if (row >= board.length || col >= board[row].length) return -2;
-
 		// return the int that is in the proper position
-		return board[row][col];
+		return board[row][col].getPieceNumber();
 	}
 
+	//get team of a piece in the array
+	public char getTeam(int row, int col) {
+		return board[row][col].getTeam();
+	}
+
+
 	//move the value of a piece in the array (copy piece over and then delete previous)
-	public void setPiece(int newRow, int newCol, int origRow, int origCol, int piece) {
+	public void setPiece(int newRow, int newCol, int origRow, int origCol) {
 		// if we're out of bounds or anything, return;
 		if (board == null || newRow < 0 || newCol < 0) return;
 		if (newRow >= board.length || newCol >= board[newRow].length) return;
 
-		// return the character that is in the proper position
-		board[newRow][newCol] = piece;
-		board[origRow][origCol] = -1; // empty
+		board[newRow][newCol] = new Piece(board[origRow][origCol]);
+		board[origRow][origCol] = null; // set old spot to empty
 	}
 
-
-
+	// adds pieces to the captured pieces ArrayList
+	//TODO: please update these to arrayLists of pieces isntead of arrayLists of ints, update the copy constructor if need be
+	public void capturePiece(int playerId, int targetedPiece) {
+		if (playerId == 0) {
+			bluePieces.add(targetedPiece);
+		}
+		else if (playerId == 1) {
+			redPieces.add(targetedPiece);
+		}
+	}
 
 
 	public int getGamePhase() {return gamePhase;}
@@ -136,14 +150,7 @@ public class StrategoState extends GameState {
 		this.bluePieces = new ArrayList<Integer>(bluePieces);
 	}
 
-	public void capturePiece(int playerId, int targetedPiece) {
-		if (playerId == 0) {
-			bluePieces.add(targetedPiece);
-		}
-		else if (playerId == 1) {
-			redPieces.add(targetedPiece);
-		}
-	}
+
 
 	@Override
 	public String toString() {
