@@ -94,8 +94,10 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			int col = mp.getCol();
 			int destRow = mp.getDestRow();
 			int destCol = mp.getDestCol();
-			int pieceVal = gameState.getPiece(row,col);
-			int targetedPieceVal = gameState.getPiece(destRow,destCol);
+			Piece piece = gameState.getPiece(row,col); // now returns Piece instead of int
+			int pieceVal = piece.getPieceNumber(); // we can get value of that Piece here (also need to use Piece object later)
+			Piece targetedPiece = gameState.getPiece(destRow,destCol);
+			int targetedPieceVal = targetedPiece.getPieceNumber();
 			char pieceTeam = gameState.getTeam(row,col);
 			char destTeam = gameState.getTeam(destRow,destCol);
 
@@ -172,28 +174,28 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 				return true;
 			}
 			else if (pieceVal > targetedPieceVal) { // if attacker is greater, take previous piece
-				gameState.capturePiece(playerId,targetedPieceVal);
+				gameState.capturePiece(playerId,targetedPiece);
 				gameState.setPiece(destRow,destCol,row,col);
 				return true;
 			}
 			else if (targetedPieceVal > pieceVal) { // delete piece that attacked if its opponent is greater
 				if (targetedPieceVal == 10 && pieceVal == 1) { // if a spy is attacking a 10
-					gameState.capturePiece(playerId,targetedPieceVal);
+					gameState.capturePiece(playerId,targetedPiece);
 					gameState.setPiece(destRow,destCol,row,col);
 					return true;
 				}
 				else if (targetedPieceVal == 11 && pieceVal == 3) { // if a miner is attacking a bomb
-					gameState.capturePiece(playerId,targetedPieceVal);
+					gameState.capturePiece(playerId,targetedPiece);
 					gameState.setPiece(destRow,destCol,row,col);
 					return true;
 				}
 				else if (playerId == 0) {
-					gameState.capturePiece(1,pieceVal); // TODO: update to work with Piece lists
+					gameState.capturePiece(1,piece);
 					gameState.setPiece(row, col, row, col);
 					return true;
 				}
 				else if (playerId == 1) {
-					gameState.capturePiece(0,pieceVal); // TODO: update to work with Piece lists
+					gameState.capturePiece(0,piece);
 					gameState.setPiece(row, col, row, col);
 					return true;
 				}

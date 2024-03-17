@@ -23,8 +23,8 @@ public class StrategoState extends GameState {
 	
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
-	private ArrayList<Integer> redPieces; // pieces red has captured
-	private ArrayList<Integer> bluePieces; // pieces blue has captured
+	private ArrayList<Piece> redPieces; // pieces red has captured
+	private ArrayList<Piece> bluePieces; // pieces blue has captured
 	private int playerId; // 0 for player 1, 1 for player 2
 	private int gamePhase; // 0 for players placing pieces, 1 for gameplay, 2 for game over
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
@@ -47,8 +47,8 @@ public class StrategoState extends GameState {
 		isRedReady = false;
 		isBlueReady = false;
 		board = new Piece[8][10]; // [row][col]
-		bluePieces = new ArrayList<Integer>();
-		redPieces = new ArrayList<Integer>();
+		bluePieces = new ArrayList<Piece>();
+		redPieces = new ArrayList<Piece>();
 
 	}
 
@@ -72,14 +72,14 @@ public class StrategoState extends GameState {
 				this.board[row][col] = new Piece(orig.board[row][col]); // replace all pieces with new pieces for network play
 			}
 		}
-		this.bluePieces = new ArrayList<Integer>(orig.bluePieces);
-		this.redPieces = new ArrayList<Integer>(orig.redPieces);
+		this.bluePieces = new ArrayList<Piece>(orig.bluePieces);
+		this.redPieces = new ArrayList<Piece>(orig.redPieces);
 	}
 
 	//get value of a piece in the array
-	public int getPiece(int row, int col) {
+	public Piece getPiece(int row, int col) {
 		// return the int that is in the proper position
-		return board[row][col].getPieceNumber();
+		return board[row][col];
 	}
 
 	//get team of a piece in the array
@@ -101,7 +101,7 @@ public class StrategoState extends GameState {
 	// adds pieces to the captured pieces ArrayList
 	//TODO: please update these to arrayLists of pieces isntead of arrayLists of ints,
 	// update the copy constructor if need be. Could also just do 1 ArrayList instead
-	public void capturePiece(int playerId, int targetedPiece) {
+	public void capturePiece(int playerId, Piece targetedPiece) {
 		if (playerId == 0) {
 			bluePieces.add(targetedPiece);
 		}
@@ -135,20 +135,20 @@ public class StrategoState extends GameState {
 		this.playerId = playerId;
 	}
 
-	public ArrayList<Integer> getRedPieces() {
-		return new ArrayList<Integer>(this.redPieces);
+	public ArrayList<Piece> getRedPieces() {
+		return new ArrayList<Piece>(this.redPieces);
 	}
 
-	public void setRedPieces(ArrayList<Integer> redPieces) {
-		this.redPieces = new ArrayList<Integer>(redPieces);
+	public void setRedPieces(ArrayList<Piece> redPieces) {
+		this.redPieces = new ArrayList<Piece>(redPieces);
 	}
 
-	public ArrayList<Integer> getBluePieces() {
-		return new ArrayList<Integer>(this.bluePieces);
+	public ArrayList<Piece> getBluePieces() {
+		return new ArrayList<Piece>(this.bluePieces);
 	}
 
-	public void setBluePieces(ArrayList<Integer> bluePieces) {
-		this.bluePieces = new ArrayList<Integer>(bluePieces);
+	public void setBluePieces(ArrayList<Piece> bluePieces) {
+		this.bluePieces = new ArrayList<Piece>(bluePieces);
 	}
 
 
