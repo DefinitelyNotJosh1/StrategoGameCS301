@@ -24,7 +24,8 @@ public class StrategoState extends GameState {
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
 
-
+	private ArrayList<Integer> redPieces = new ArrayList<Integer>(); // captured red pieces
+	private ArrayList<Integer> bluePieces = new ArrayList<Integer>(); // captured blue piece
 	private int playerId; // 0 for player 1, 1 for player 2
 	private int gamePhase; // 0 for players placing pieces, 1 for gameplay, 2 for game over
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
@@ -33,7 +34,7 @@ public class StrategoState extends GameState {
 	private boolean isBlueReady;
 	private CapturedPieces capturedPieces;
 	private StrategoMainActivity mainActivity;
-	private int[][] board;
+	public int[][] board;
 
 
 	// Josh - could use a 2d Array to signify whether each piece is visible or not - another option
@@ -70,14 +71,29 @@ public class StrategoState extends GameState {
 		this.board = new int[8][10]; // [row][col]
 	}
 
+	//get value of a piece in the array
 	public int getPiece(int row, int col) {
-		// if we're out of bounds or anything, return '?';
-		if (board == null || row < 0 || col < 0) return '?';
-		if (row >= board.length || col >= board[row].length) return '?';
+		// if we're out of bounds or anything, return -2;
+		if (board == null || row < 0 || col < 0) return -2;
+		if (row >= board.length || col >= board[row].length) return -2;
 
-		// return the character that is in the proper position
+		// return the int that is in the proper position
 		return board[row][col];
 	}
+
+	//move the value of a piece in the array (copy piece over and then delete previous)
+	public void setPiece(int newRow, int newCol, int origRow, int origCol, int piece) {
+		// if we're out of bounds or anything, return;
+		if (board == null || newRow < 0 || newCol < 0) return;
+		if (newRow >= board.length || newCol >= board[newRow].length) return;
+
+		// return the character that is in the proper position
+		board[newRow][newCol] = piece;
+		board[origRow][origCol] = -1; // empty
+	}
+
+
+
 
 
 	public int getGamePhase() {return gamePhase;}

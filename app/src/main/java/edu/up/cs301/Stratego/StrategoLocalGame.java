@@ -78,6 +78,26 @@ public class StrategoLocalGame extends LocalGame {
 				return true;
 		}
 		else if (action instanceof MovePiece) {
+			MovePiece mp = (MovePiece)action;
+			int row = mp.getRow();
+			int col = mp.getCol();
+			int destRow = mp.getDestRow();
+			int destCol = mp.getDestCol();
+			int piece = gameState.getPiece(row,col);
+			int targetedPiece = gameState.getPiece(destRow,destCol);
+
+			if (targetedPiece == -1) { // move piece if spot is empty
+				gameState.setPiece(destRow, destCol, row, col, piece);
+			}
+			else if (piece > targetedPiece) { // if attacker is greater, take previous piece
+				gameState
+				gameState.setPiece(destRow,destCol,row,col, piece);
+			}
+			else if (targetedPiece > piece) { // delete piece that attacked if its opponent is greater
+				gameState.setPiece(row, col, row, col, -1);
+
+			}
+
 
 
 		}
