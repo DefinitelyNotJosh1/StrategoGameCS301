@@ -25,8 +25,7 @@ public class StrategoLocalGame extends LocalGame {
 
 	// the game's state
 	private StrategoState gameState;
-	private StrategoMainActivity mainActivity;
-	
+
 	/**
 	 * can this player move
 	 * 
@@ -47,7 +46,7 @@ public class StrategoLocalGame extends LocalGame {
 	/**
 	 * This ctor should be called when a new counter game is started
 	 */
-	public StrategoLocalGame(GameState state, StrategoMainActivity initMainActivity) {
+	public StrategoLocalGame(GameState state) {
 		// initialize the game state
 		if (! (state instanceof StrategoState)) {
 			//TODO: WILL CHANGE LATER
@@ -55,7 +54,6 @@ public class StrategoLocalGame extends LocalGame {
 		}
 		this.gameState = (StrategoState)state;
 		super.state = state;
-		mainActivity = initMainActivity;
 	}
 
 	/**

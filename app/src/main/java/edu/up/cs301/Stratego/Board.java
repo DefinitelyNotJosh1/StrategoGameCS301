@@ -13,15 +13,10 @@ import java.util.Random;
 public class Board extends SurfaceView {
     private int testInt;
 
-    // Basic constructor so app can compile
-    public Board(Context) {
-        super();
-    }
-
 
     // Basic copy constructor for strategoState compiling
     public Board(Board orig) {
-        super();
+        super(orig.getContext());
         this.testInt = orig.testInt;
     }
 
@@ -58,7 +53,7 @@ public class Board extends SurfaceView {
 
         //Set background
         //Drawable board = ResourcesCompat.getDrawable(context.getResources(), R.drawable.board, null);
-        this.setBackground(board);
+        //this.setBackground(board);
 
         Random gen = new Random();
 

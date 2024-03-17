@@ -31,8 +31,10 @@ public class StrategoState extends GameState {
 	private int[][] isVisible; // 0 for player 1, 1 for player 2, 2 for both
 	private boolean isRedReady;
 	private boolean isBlueReady;
-	private Board board; // has piece objects that themselves say which player they're visible to
 	private CapturedPieces capturedPieces;
+	private StrategoMainActivity mainActivity;
+	private int[][] board;
+
 
 	// Josh - could use a 2d Array to signify whether each piece is visible or not - another option
 	// is to make the current 2d int array to show position of game pieces a 3d array, with the third slot
@@ -45,7 +47,8 @@ public class StrategoState extends GameState {
 		playerId = 1;
 		isRedReady = false;
 		isBlueReady = false;
-		board = new Board();
+		board = new int[8][10]; // [row][col]
+
 		capturedPieces = new CapturedPieces();
 
 	}
@@ -64,8 +67,18 @@ public class StrategoState extends GameState {
 		this.playerId = orig.playerId;
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
-		this.board = new Board(orig.board);
+		this.board = new int[8][10]; // [row][col]
 	}
+
+	public int getPiece(int row, int col) {
+		// if we're out of bounds or anything, return '?';
+		if (board == null || row < 0 || col < 0) return '?';
+		if (row >= board.length || col >= board[row].length) return '?';
+
+		// return the character that is in the proper position
+		return board[row][col];
+	}
+
 
 	public int getGamePhase() {return gamePhase;}
 
@@ -84,8 +97,6 @@ public class StrategoState extends GameState {
 	public boolean getIsBlueReady() {return isBlueReady;}
 
 	public void setIsBlueReady(boolean isReady) {this.isBlueReady = isReady;}
-	public Board getBoard() {return board;}
-	public void setBoard(Board board) {this.board = new Board(board);}
 	public int getPlayerId() {
 		return playerId;
 	}
@@ -99,7 +110,7 @@ public class StrategoState extends GameState {
 				"gamePhase=" + this.gamePhase +
 				", isCaptured=" + this.isCaptured +
 				", isVisible=" + Arrays.toString(this.isVisible) +
-				", playerTurn=" + this.playerTurn +
+				", playerTurn=" + this.playerId +
 				", isRedReady=" + this.isRedReady +
 				", isBlueReady=" + this.isBlueReady +
 				", board=" + this.board +
