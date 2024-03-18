@@ -15,6 +15,15 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
+
+/**
+ * this is the primary activity for Stratego
+ * Setting up for how many players and who is playing against.
+ *
+ *
+ * @author James, Indiana, Joshua, Ethan
+ * @Version March 18, 2024
+ */
 public class StrategoMainActivity extends GameMainActivity {
 	
 	// the port number that this game will use when playing over the network

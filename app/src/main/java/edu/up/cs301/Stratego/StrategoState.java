@@ -15,9 +15,17 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 /**
  * This contains the state for the Counter game. The state consist of simply
  * the value of the counter.
- * 
+ *
  * @author Steven R. Vegdahl
  * @version July 2013
+ */
+
+/**
+ * We updated this to get the state of the Stratego game. The state consist
+ * where and how many pieces are on the board.
+ *
+ * @author James, Indiana, Joshua, Ethan
+ * @Version March 18, 2024
  */
 public class StrategoState extends GameState {
 	
@@ -49,10 +57,8 @@ public class StrategoState extends GameState {
 		board = new Piece[8][10]; // [row][col]
 		bluePieces = new ArrayList<Piece>();
 		redPieces = new ArrayList<Piece>();
-
 	}
 
-	
 	/**
 	 * copy constructor; makes a copy of the original object
 	 * 
@@ -117,21 +123,14 @@ public class StrategoState extends GameState {
 
 
 	public int getGamePhase() {return gamePhase;}
-
 	public void setGamePhase(int phase) {this.gamePhase = phase;}
-
 	public int getIsCaptured() {return isCaptured;}
-
 	public void setIsCaptured(int capt) {this.isCaptured = capt;}
 	public int[][] getIsVisible() {return isVisible;}
 	public void setIsVisible(int[][] vis) {this.isVisible = vis;}
-
 	public boolean getIsRedReady() {return isRedReady;}
-
 	public void setIsRedReady(boolean isReady) {this.isRedReady = isReady;}
-
 	public boolean getIsBlueReady() {return isBlueReady;}
-
 	public void setIsBlueReady(boolean isReady) {this.isBlueReady = isReady;}
 	public int getPlayerId() {
 		return playerId;
@@ -139,15 +138,12 @@ public class StrategoState extends GameState {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-
 	public ArrayList<Piece> getRedPieces() {
 		return new ArrayList<Piece>(this.redPieces);
 	}
-
 	public void setRedPieces(ArrayList<Piece> redPieces) {
 		this.redPieces = new ArrayList<Piece>(redPieces);
 	}
-
 	public ArrayList<Piece> getBluePieces() {
 		return new ArrayList<Piece>(this.bluePieces);
 	}
@@ -155,8 +151,6 @@ public class StrategoState extends GameState {
 	public void setBluePieces(ArrayList<Piece> bluePieces) {
 		this.bluePieces = new ArrayList<Piece>(bluePieces);
 	}
-
-
 
 	@Override
 	public String toString() {
