@@ -101,6 +101,14 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			char pieceTeam = gameState.getTeam(row,col);
 			char destTeam = gameState.getTeam(destRow,destCol);
 
+			//return false if player is trying to move an opponent's piece
+			if (pieceTeam == 'B' && playerId == 1) {
+				return false;
+			}
+			if (pieceTeam == 'R' && playerId == 0) {
+				return false;
+			}
+
 			//return false if out of bounds
 			if (destRow >= gameState.board.length || destCol >= gameState.board[row].length) return false;
 			if (destRow < 0 || destCol < 0) return false;
