@@ -23,7 +23,6 @@ public class MovePiece extends GameAction {
         this.col = col;
         this.destRow = destRow;
         this.destCol = destCol;
-
     }
 
     //getters for everything

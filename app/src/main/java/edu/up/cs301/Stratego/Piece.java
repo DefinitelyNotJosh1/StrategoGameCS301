@@ -51,6 +51,5 @@ public class Piece {
         }
         */
         return pieceNumber + "";
-
     }
 }
