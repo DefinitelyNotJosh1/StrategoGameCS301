@@ -32,7 +32,7 @@ public class Piece {
             case 'B':
                 teamString = "Blue";
                 break;
-            case 'A':
+            case 'R':
                 teamString = "Red";
                 break;
         }

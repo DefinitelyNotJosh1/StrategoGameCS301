@@ -68,8 +68,13 @@ public class StrategoState extends GameState {
 		this.isBlueReady = orig.isBlueReady;
 		this.board = new Piece[8][10]; // [row][col]
 		for (int row = 0; row < board.length; row++) {
-			for (int col = 0; col < board[col].length; col++) {
-				this.board[row][col] = new Piece(orig.board[row][col]); // replace all pieces with new pieces for network play
+			for (int col = 0; col < board[row].length; col++) {
+				if (orig.board[row][col] == null) {
+					this.board[row][col] = null;
+				}
+				else {
+					this.board[row][col] = new Piece(orig.board[row][col]); // replace all pieces with new pieces for network play
+				}
 			}
 		}
 		this.bluePieces = new ArrayList<Piece>(orig.bluePieces);
@@ -155,14 +160,40 @@ public class StrategoState extends GameState {
 
 	@Override
 	public String toString() {
+		String bluePieces = "";
+		String redPieces = "";
+		for (Piece p : this.bluePieces) {
+			bluePieces = bluePieces + p.toString() + ", ";
+		}
+		for (Piece p : this.redPieces) {
+			redPieces = redPieces + p.toString() + ", ";
+		}
+
+		int aliveBluePieces = 0;
+		int aliveRedPieces = 0;
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[row].length; col++) {
+				if (board[row][col] == null) {
+					continue;
+				} else if (board[row][col].getTeam() == 'B') {
+					aliveBluePieces++;
+				} else if (board[row][col].getTeam() == 'R') {
+					aliveRedPieces++;
+				}
+			}
+		}
+
+
 		return "StrategoState{" +
 				"gamePhase=" + this.gamePhase +
-				", isCaptured=" + this.isCaptured +
+				", CapturedBluePieces=" + bluePieces +
+				", CapturedRedPieces=" + redPieces +
+				", aliveBluePieces= " + aliveBluePieces +
+				", aliveRedPieces= " + aliveRedPieces +
 				", isVisible=" + Arrays.toString(this.isVisible) +
 				", playerTurn=" + this.playerId +
 				", isRedReady=" + this.isRedReady +
 				", isBlueReady=" + this.isBlueReady +
-				", board=" + this.board +
 				'}';
 	}
 }
