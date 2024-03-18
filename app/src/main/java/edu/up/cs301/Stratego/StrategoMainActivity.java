@@ -22,7 +22,7 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
  *
  *
  * @author James, Indiana, Joshua, Ethan
- * @Version March 18, 2024
+ * @version March 18, 2024
  */
 public class StrategoMainActivity extends GameMainActivity {
 	
