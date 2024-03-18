@@ -22,4 +22,22 @@ public class Piece {
     public int getIsVisible() {return isVisible;}
     public void setIsVisible(int vis) {isVisible = vis;}
     public char getTeam() {return team;}
+
+    @Override
+    public String toString() {
+        /* // might not use
+        String teamString = "";
+
+        switch (team) {
+            case 'B':
+                teamString = "Blue";
+                break;
+            case 'A':
+                teamString = "Red";
+                break;
+        }
+        */
+        return pieceNumber + "";
+
+    }
 }
