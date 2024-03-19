@@ -25,7 +25,7 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
  * where and how many pieces are on the board.
  *
  * @author James, Indiana, Joshua, Ethan
- * @Version March 18, 2024
+ * @version March 18, 2024
  */
 public class StrategoState extends GameState {
 	
