@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
+import java.util.ArrayList;
+
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
  * and allows the human player to press the '+' and '-' buttons in order to
@@ -27,7 +29,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 	/* instance variables */
 	
 	// The TextView the displays the current counter value
-	private TextView counterValueTextView;
+	private TextView testResultsTextView;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
 	private StrategoState state;
@@ -48,10 +50,10 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 	 * Returns the GUI's top view object
 	 * 
 	 * @return
-	 * 		the top object in the GUI's view heirarchy
+	 * 		the top object in the GUI's view hierarchy
 	 */
 	public View getTopView() {
-		return myActivity.findViewById(R.id.top_gui_layout);
+		return myActivity.findViewById(R.id.project_e_layout);
 	}
 	
 	/**
@@ -73,22 +75,24 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		// if we are not yet connected to a game, ignore
 		if (game == null) return;
 
-		// Construct the action and send it to the game
-		GameAction action = null;
-		if (button.getId() == R.id.plusButton) {
-			// plus button: create "increment" action
-			action = new StrategoMoveAction(this, true);
-		}
-		else if (button.getId() == R.id.minusButton) {
-			// minus button: create "decrement" action
-			action = new StrategoMoveAction(this, false);
-		}
-		else {
-			// something else was pressed: ignore
-			return;
-		}
-		
-		game.sendAction(action); // send action to the game
+	//	testResultsTextView.setText("");
+
+	//	StrategoState firstInstance = new StrategoState();
+	//	firstInstance.setPlayerId(0);
+
+	//	StrategoState firstCopy = new StrategoState(firstInstance);
+
+	//	firstInstance.setIsBlueReady(true);
+	//	firstInstance.setIsRedReady(true);
+	//	firstInstance.setGamePhase(1);
+
+	//	Piece randBlue = new Piece(10,'B');
+	//	Piece randRed = new Piece(9, 'R');
+	//	firstInstance.setPiece();
+	//	ArrayList<Piece> blue = new ArrayList<Piece>();
+	//	blue.add(randBlue);
+	//	firstInstance.setBluePieces(blue);
+
 	}// onClick
 	
 	/**
@@ -115,28 +119,18 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 	 * 		the activity under which we are running
 	 */
 	public void setAsGui(GameMainActivity activity) {
-		
 		// remember the activity
 		this.myActivity = activity;
 		
 	    // Load the layout resource for our GUI
-		activity.setContentView(R.layout.counter_human_player);
-		
-		// make this object the listener for both the '+' and '-' 'buttons
-		Button plusButton = (Button) activity.findViewById(R.id.plusButton);
-		plusButton.setOnClickListener(this);
-		Button minusButton = (Button) activity.findViewById(R.id.minusButton);
-		minusButton.setOnClickListener(this);
+		myActivity.setContentView(R.layout.project_e);
 
-		// remember the field that we update to display the counter's value
-		this.counterValueTextView =
-				(TextView) activity.findViewById(R.id.counterValueTextView);
-		
-		// if we have a game state, "simulate" that we have just received
-		// the state from the game so that the GUI values are updated
-		if (state != null) {
-			receiveInfo(state);
-		}
+		// initializes variable to EditText in layout
+		this.testResultsTextView = myActivity.findViewById(R.id.editText);
+
+		// sets this class as a handler for the button
+		Button runTest = (Button) myActivity.findViewById(R.id.runTestButton);
+		runTest.setOnClickListener(this);
 	}
 
 }// class CounterHumanPlayer
