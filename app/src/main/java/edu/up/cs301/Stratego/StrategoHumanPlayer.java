@@ -83,8 +83,6 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		firstInstance.setPlayerId(0);
 		StrategoState firstCopy = new StrategoState(firstInstance);
 
-		// TODO: set up game board
-
 		firstInstance.setIsBlueReady(true);
 		firstInstance.setIsRedReady(true);
 		firstInstance.setGamePhase(1);
@@ -105,6 +103,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 			System.out.println("FirstCopy and SecondCopy are the same");
 
 			testResultsTextView.append(fstCpy);
+			testResultsTextView.append("\n\n");
 			testResultsTextView.append(secCpy);
 		}
 		else {
