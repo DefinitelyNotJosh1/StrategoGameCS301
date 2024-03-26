@@ -90,6 +90,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		// TODO: playing the game from start to finish is the bulk of the assignment
 		MovePiece move1 = new MovePiece(this,2,1,5,1);
 		game.sendAction(move1);
+		testResultsTextView.append("\nAttack red 9 (5,1) with blue 2 (2,1)");
 
 		//MovePiece move2 = new MovePiece(this,2,1,5,1);
 
