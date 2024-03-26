@@ -88,6 +88,11 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		firstInstance.setGamePhase(1);
 
 		// TODO: playing the game from start to finish is the bulk of the assignment
+		MovePiece move1 = new MovePiece(this,2,1,5,1);
+		game.sendAction(move1);
+
+		//MovePiece move2 = new MovePiece(this,2,1,5,1);
+
 
 		// creation of the secondInstance and the deep copy
 		StrategoState secondInstance = new StrategoState();
