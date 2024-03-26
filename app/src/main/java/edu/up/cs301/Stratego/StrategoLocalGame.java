@@ -197,13 +197,8 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 					gameState.setPiece(destRow,destCol,row,col);
 					return true;
 				}
-				else if (playerId == 0) {
-					gameState.capturePiece(1,piece);
-					gameState.setPiece(row, col, row, col);
-					return true;
-				}
-				else if (playerId == 1) {
-					gameState.capturePiece(0,piece);
+				else { // attacking piece loses
+					gameState.capturePiece(Math.abs(playerId - 1),piece);
 					gameState.setPiece(row, col, row, col);
 					return true;
 				}
@@ -233,7 +228,16 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 	 */
 	@Override
 	protected String checkIfGameOver() {
-		//empty, our game doesn't use counters
+		for (Piece p : gameState.getRedPieces()) {
+			if (p.getPieceNumber() == 0) {
+				return "Red has won the game!";
+			}
+		}
+		for (Piece p : gameState.getBluePieces()) {
+			if (p.getPieceNumber() == 0) {
+				return "Blue has won the game!";
+			}
+		}
 		return null;
 
 	}
