@@ -36,7 +36,6 @@ public class StrategoState extends GameState {
 	private int playerId; // 0 for player 1, 1 for player 2
 	private int gamePhase; // 0 for players placing pieces, 1 for gameplay, 2 for game over
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
-	private int[][] isVisible; // 0 for player 1, 1 for player 2, 2 for both
 	private boolean isRedReady;
 	private boolean isBlueReady;
 	private StrategoMainActivity mainActivity;
@@ -68,7 +67,6 @@ public class StrategoState extends GameState {
 	public StrategoState(StrategoState orig) {
 		this.gamePhase = orig.gamePhase;
 		this.isCaptured = orig.isCaptured;
-		this.isVisible = orig.isVisible;
 		this.playerId = orig.playerId;
 		this.isRedReady = orig.isRedReady;
 		this.isBlueReady = orig.isBlueReady;
@@ -124,8 +122,6 @@ public class StrategoState extends GameState {
 	public void setGamePhase(int phase) {this.gamePhase = phase;}
 	public int getIsCaptured() {return isCaptured;}
 	public void setIsCaptured(int capt) {this.isCaptured = capt;}
-	public int[][] getIsVisible() {return isVisible;}
-	public void setIsVisible(int[][] vis) {this.isVisible = vis;}
 	public boolean getIsRedReady() {return isRedReady;}
 	public void setIsRedReady(boolean isReady) {this.isRedReady = isReady;}
 	public boolean getIsBlueReady() {return isBlueReady;}
@@ -182,7 +178,6 @@ public class StrategoState extends GameState {
 				", CapturedRedPieces=" + redPieces +
 				", aliveBluePieces= " + aliveBluePieces +
 				", aliveRedPieces= " + aliveRedPieces +
-				", isVisible=" + Arrays.toString(this.isVisible) +
 				", playerTurn=" + this.playerId +
 				", isRedReady=" + this.isRedReady +
 				", isBlueReady=" + this.isBlueReady +
