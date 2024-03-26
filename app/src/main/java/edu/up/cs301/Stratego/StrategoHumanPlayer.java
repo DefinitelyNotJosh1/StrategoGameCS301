@@ -75,23 +75,41 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		// if we are not yet connected to a game, ignore
 		if (game == null) return;
 
-	//	testResultsTextView.setText("");
+		// clears TextView
+		testResultsTextView.setText("");
 
-	//	StrategoState firstInstance = new StrategoState();
-	//	firstInstance.setPlayerId(0);
+		// creation of firstInstance and the deep copy
+		StrategoState firstInstance = new StrategoState();
+		firstInstance.setPlayerId(0);
+		StrategoState firstCopy = new StrategoState(firstInstance);
 
-	//	StrategoState firstCopy = new StrategoState(firstInstance);
+		// TODO: set up game board
 
-	//	firstInstance.setIsBlueReady(true);
-	//	firstInstance.setIsRedReady(true);
-	//	firstInstance.setGamePhase(1);
+		firstInstance.setIsBlueReady(true);
+		firstInstance.setIsRedReady(true);
+		firstInstance.setGamePhase(1);
 
-	//	Piece randBlue = new Piece(10,'B');
-	//	Piece randRed = new Piece(9, 'R');
-	//	firstInstance.setPiece();
-	//	ArrayList<Piece> blue = new ArrayList<Piece>();
-	//	blue.add(randBlue);
-	//	firstInstance.setBluePieces(blue);
+		// TODO: playing the game from start to finish is the bulk of the assignment
+
+		// creation of the secondInstance and the deep copy
+		StrategoState secondInstance = new StrategoState();
+		secondInstance.setPlayerId(0);
+		StrategoState secondCopy = new StrategoState(secondInstance);
+
+		// implements toString() for both copies
+		String fstCpy = firstCopy.toString();
+		String secCpy = secondCopy.toString();
+
+		// if the copies are identical, we append the strings to the TextView
+		if(fstCpy.equals(secCpy)) {
+			System.out.println("FirstCopy and SecondCopy are the same");
+
+			testResultsTextView.append(fstCpy);
+			testResultsTextView.append(secCpy);
+		}
+		else {
+			testResultsTextView.append("Copies are not identical... :(");
+		}
 
 	}// onClick
 	
@@ -125,11 +143,11 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 	    // Load the layout resource for our GUI
 		myActivity.setContentView(R.layout.project_e);
 
-		// initializes variable to EditText in layout
+		// initializes variable to EditText (subclass of TextView) in layout
 		this.testResultsTextView = myActivity.findViewById(R.id.editText);
 
 		// sets this class as a handler for the button
-		Button runTest = (Button) myActivity.findViewById(R.id.runTestButton);
+		Button runTest = myActivity.findViewById(R.id.runTestButton);
 		runTest.setOnClickListener(this);
 	}
 
