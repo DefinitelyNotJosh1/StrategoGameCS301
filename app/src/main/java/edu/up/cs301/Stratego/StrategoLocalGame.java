@@ -93,16 +93,28 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			int destRow = mp.getDestRow();
 			int destCol = mp.getDestCol();
 			Piece piece = gameState.getPiece(row,col); // now returns Piece instead of int
-			int pieceVal = piece.getPieceNumber(); // we can get value of that Piece here (also need to use Piece object later)
-			Piece targetedPiece = gameState.getPiece(destRow,destCol);
-			int targetedPieceVal = targetedPiece.getPieceNumber();
-			char pieceTeam = gameState.getTeam(row,col);
-			char destTeam = gameState.getTeam(destRow,destCol);
-
-			if (targetedPiece.isLake()) { // return false if player is trying to move into a lake
-				return false;
+			int pieceVal = 0;
+			char pieceTeam = 'L';
+			if (piece != null) {
+				pieceVal = piece.getPieceNumber(); // we can get value of that Piece here (also need to use Piece object later)
+				pieceTeam = gameState.getTeam(row,col);
 			}
 
+			Piece targetedPiece = gameState.getPiece(destRow,destCol);
+			int targetedPieceVal = 0;
+			char destTeam = 'L';
+
+			if (targetedPiece != null) {
+				targetedPieceVal = targetedPiece.getPieceNumber();
+				destTeam = gameState.getTeam(destRow,destCol);
+			}
+
+			if (targetedPiece != null && targetedPiece.isLake()) { // return false if player is trying to move into a lake
+				return false;
+			}
+			if (targetedPiece != null) {
+
+			}
 			//return false if player is trying to move an opponent's piece
 			if (pieceTeam == 'B' && playerId == 1) {
 				return false;
@@ -110,6 +122,7 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			if (pieceTeam == 'R' && playerId == 0) {
 				return false;
 			}
+
 
 			//return false if out of bounds
 			if (destRow >= gameState.board.length || destCol >= gameState.board[row].length) return false;
@@ -231,11 +244,17 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 	@Override
 	protected String checkIfGameOver() {
 		for (Piece p : gameState.getRedPieces()) {
+			if (p == null) {
+				continue;
+			}
 			if (p.getPieceNumber() == 0) {
 				return "Red has won the game!";
 			}
 		}
 		for (Piece p : gameState.getBluePieces()) {
+			if (p == null) {
+				continue;
+			}
 			if (p.getPieceNumber() == 0) {
 				return "Blue has won the game!";
 			}

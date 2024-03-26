@@ -37,6 +37,7 @@ public class Piece {
     //piece constructor for Lake
     public Piece(boolean lake) {
         this.isLake = lake;
+        this.team = 'L';
     }
 
     public int getPieceNumber() {return pieceNumber;}
