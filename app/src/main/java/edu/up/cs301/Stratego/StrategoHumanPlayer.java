@@ -192,7 +192,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		game.sendAction(move26);
 		testResultsTextView.append("\nMove blue 2 (4,9) to red 0 (7,9), CAPTURED FLAG");
 
-		testResultsTextView.append("\nBLUE WINS");
+		testResultsTextView.append("\nBLUE WINS\n");
 
 		// creation of the secondInstance and the deep copy
 		StrategoState secondInstance = new StrategoState();
@@ -217,7 +217,8 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 			testResultsTextView.append("Copies are not identical... :(");
 		}
 
-		testResultsTextView.append("\n\n" + gme);
+		testResultsTextView.append("\n\n");
+		testResultsTextView.append(gme);
 
 	}// onClick
 	
