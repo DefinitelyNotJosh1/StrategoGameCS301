@@ -17,11 +17,13 @@ public class Piece {
     private int isVisible; // could be unnecessary, not using it for now
     private char team; // made it a char so we don't have to worry about deep
                        // copying - 'B' blue, 'R' red
+    private boolean isLake;
 
     public Piece(Piece orig) {
         this.pieceNumber = orig.pieceNumber;
         this.isVisible = orig.isVisible;
         this.team = orig.team;
+        this.isLake = orig.isLake;
     }
 
 
@@ -29,12 +31,24 @@ public class Piece {
     public Piece(int pieceNumber, char team) {
         this.pieceNumber = pieceNumber;
         this.team = team;
+        this.isLake = false;
+    }
+
+    //piece constructor for Lake
+    public Piece(boolean lake) {
+        this.isLake = lake;
     }
 
     public int getPieceNumber() {return pieceNumber;}
     public int getIsVisible() {return isVisible;}
     public void setIsVisible(int vis) {isVisible = vis;}
     public char getTeam() {return team;}
+    public boolean isLake() {
+        return isLake;
+    }
+    public void setLake(boolean lake) {
+        isLake = lake;
+    }
 
     @Override
     public String toString() {

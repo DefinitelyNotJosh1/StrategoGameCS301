@@ -4,7 +4,6 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
-import android.util.Log;
 
 import java.io.Serializable;
 
@@ -51,7 +50,6 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 	public StrategoLocalGame(GameState state) {
 		// initialize the game state
 		if (! (state instanceof StrategoState)) {
-			//TODO: WILL CHANGE LATER
 			state = new StrategoState();
 		}
 		this.gameState = (StrategoState)state;
@@ -100,6 +98,10 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			int targetedPieceVal = targetedPiece.getPieceNumber();
 			char pieceTeam = gameState.getTeam(row,col);
 			char destTeam = gameState.getTeam(destRow,destCol);
+
+			if (targetedPiece.isLake()) { // return false if player is trying to move into a lake
+				return false;
+			}
 
 			//return false if player is trying to move an opponent's piece
 			if (pieceTeam == 'B' && playerId == 1) {

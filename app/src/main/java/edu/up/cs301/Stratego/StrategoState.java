@@ -38,14 +38,7 @@ public class StrategoState extends GameState {
 	private int isCaptured; // 0 neither, 1 player 1 flag, 2 player 2 flag
 	private boolean isRedReady;
 	private boolean isBlueReady;
-	private StrategoMainActivity mainActivity;
 	public Piece[][] board;
-
-
-	// Josh - could use a 2d Array to signify whether each piece is visible or not - another option
-	// is to make the current 2d int array to show position of game pieces a 3d array, with the third slot
-	// containing a 0, 1, or 2, signifying if the pieces are visible to red, blue, or both - should
-	// make for less hassle
 
 	public StrategoState() {
 		gamePhase = 0;
@@ -54,6 +47,33 @@ public class StrategoState extends GameState {
 		isRedReady = false;
 		isBlueReady = false;
 		board = new Piece[8][10]; // [row][col]
+		//order pieces are put on board - kept it simple for my sake when I was counting
+		int[] blues = {10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 5, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 1, 11, 11, 11, 11, 0};
+		int[] reds = {10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5, 5, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 1, 11, 11, 11, 11, 0};
+
+		int blueIndex = 0;
+		int redIndex = 0;
+		int rows = 8;
+		int cols = 10;
+
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				if (row < 3) { // set up blue pieces
+					int value = blues[blueIndex];
+					blueIndex++;
+					board[row][col] = new Piece(value, 'B');
+				} else if (row > 4) { // set up red pieces
+					int value = reds[redIndex];
+					redIndex++;
+					board[row][col] = new Piece(value, 'R');
+				}
+					// Setting up lakes
+					if ((row == 3 || row == 4) && (col == 2 || col == 3 || col == 6 || col == 7)) {
+						board[row][col] = new Piece(true);
+					}
+				}
+			}
+
 		bluePieces = new ArrayList<Piece>();
 		redPieces = new ArrayList<Piece>();
 	}
