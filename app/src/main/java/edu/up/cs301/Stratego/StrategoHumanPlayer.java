@@ -88,109 +88,82 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		firstInstance.setGamePhase(1);
 
 		// TODO: playing the game from start to finish is the bulk of the assignment
-		MovePiece move1 = new MovePiece(this,2,1,5,1);
-		game.sendAction(move1);
+		firstInstance.movePiece(2,1,5,1);
 		testResultsTextView.append("\nAttack red 9 (5,1) with blue 2 (2,1)");
 
-		MovePiece move2 = new MovePiece(this,5,0,4,0);
-		game.sendAction(move2);
+		firstInstance.movePieceAction(5,0,4,0);
 		testResultsTextView.append("\nMove red 10 (5,0) to (5,1)");
 
-		MovePiece move3 = new MovePiece(this,2,9,3,9);
-		game.sendAction(move3);
+		firstInstance.movePieceAction(2,9,3,9);
 		testResultsTextView.append("\nMove blue 10 (2,9) to (3,9)");
 
-		MovePiece move4 = new MovePiece(this,5,8,6,8);
-		game.sendAction(move4);
-		testResultsTextView.append("\nMove red 6 (5,8) to empty (6,8)");
+		firstInstance.movePieceAction(5,8,4,8);
+		testResultsTextView.append("\nMove red 6 (5,8) to empty (4,8)");
 
-		MovePiece move5 = new MovePiece(this,3,9,4,9);
-		game.sendAction(move5);
+		firstInstance.movePieceAction(3,9,4,9);
 		testResultsTextView.append("\nMove blue 10 (3,9) to (4,9)");
 
-		MovePiece move6 = new MovePiece(this,4,8,4,9);
-		game.sendAction(move6);
+		firstInstance.movePieceAction(4,8,4,9);
 		testResultsTextView.append("\nMove red 6 (4,8) to blue 10 (4,9)");
 
-		MovePiece move7 = new MovePiece(this,4,9,5,9);
-		game.sendAction(move7);
+		firstInstance.movePieceAction(4,9,5,9);
 		testResultsTextView.append("\nMove blue 10 (4,9) to red 5 (5,9)");
 
-		MovePiece move8 = new MovePiece(this,6,8,2,8);
-		game.sendAction(move8);
+		firstInstance.movePieceAction(6,8,2,8);
 		testResultsTextView.append("\nMove red 2 (6,8) to blue 11 (2,8)");
 
-		MovePiece move9 = new MovePiece(this,1,1,2,1);
-		game.sendAction(move9);
+		firstInstance.movePieceAction(1,1,2,1);
 		testResultsTextView.append("\nMove blue 5 (1,1) to empty (2,1)");
 
-		MovePiece move10 = new MovePiece(this,6,7,6,8);
-		game.sendAction(move10);
+		firstInstance.movePieceAction(6,7,6,8);
 		testResultsTextView.append("\nMove red 3 (6,7) to empty (6,8)");
 
-		MovePiece move11 = new MovePiece(this,2,4,3,4);
-		game.sendAction(move11);
+		firstInstance.movePieceAction(2,4,3,4);
 		testResultsTextView.append("\nMove blue 1 (2,4) to empty (3,4)");
 
-		MovePiece move12 = new MovePiece(this,6,8,7,8);
-		game.sendAction(move12);
+		firstInstance.movePieceAction(6,8,7,8);
 		testResultsTextView.append("\nMove red 3 (6,8) to empty (7,8)");
 
-		MovePiece move13 = new MovePiece(this,2,1,3,1);
-		game.sendAction(move13);
+		firstInstance.movePieceAction(2,1,3,1);
 		testResultsTextView.append("\nMove blue 5 (2,1) to empty (3,1)");
 
-		MovePiece move14 = new MovePiece(this,5,8,4,8);
-		game.sendAction(move14);
+		firstInstance.movePieceAction(5,8,4,8);
 		testResultsTextView.append("\nMove red 3 (5,8) to empty (4,8)");
 
-		MovePiece move15 = new MovePiece(this,1,9,4,9);
-		game.sendAction(move15);
+		firstInstance.movePieceAction(1,9,4,9);
 		testResultsTextView.append("\nMove blue 2 (1,9) to empty (4,9)");
 
-		MovePiece move16 = new MovePiece(this,4,8,3,8);
-		game.sendAction(move16);
+		firstInstance.movePieceAction(4,8,3,8);
 		testResultsTextView.append("\nMove red 3 (4,8) to empty (3,8)");
 
-		MovePiece move17 = new MovePiece(this,2,0,4,0);
-		game.sendAction(move17);
+		firstInstance.movePieceAction(2,0,4,0);
 		testResultsTextView.append("\nMove blue 2 (2,0) to red 10 (4,0)");
 
-		MovePiece move18 = new MovePiece(this,3,8,2,8);
-		game.sendAction(move18);
+		firstInstance.movePieceAction(3,8,2,8);
 		testResultsTextView.append("\nMove red 3 (3,8) to blue 11 (2,8)");
 
-		MovePiece move19 = new MovePiece(this,5,9,6,9);
-		game.sendAction(move19);
+		firstInstance.movePieceAction(5,9,6,9);
 		testResultsTextView.append("\nMove blue 10 (5,9) to red 2 (6,9)");
 
-		MovePiece move20 = new MovePiece(this,5,7,4,7);
-		game.sendAction(move20);
-		testResultsTextView.append("\nMove red 6 (5,7) to lake (4,7) INVALID, RED AGAIN");
-
-		MovePiece move21 = new MovePiece(this,5,7,6,7);
-		game.sendAction(move21);
+		firstInstance.movePieceAction(5,7,6,7);
 		testResultsTextView.append("\nMove red 6 (5,7) to empty (6,7)");
 
-		MovePiece move22 = new MovePiece(this,6,9,6,8);
-		game.sendAction(move22);
+		firstInstance.movePieceAction(6,9,6,8);
 		testResultsTextView.append("\nMove blue 10 (6,9) to empty (6,8)");
 
-		MovePiece move23 = new MovePiece(this,5,1,4,1);
-		game.sendAction(move23);
+		firstInstance.movePieceAction(5,1,4,1);
 		testResultsTextView.append("\nMove red 9 (5,1) to empty (4,1)");
 
-		MovePiece move24 = new MovePiece(this,6,8,7,8);
-		game.sendAction(move24);
+		firstInstance.movePieceAction(6,8,7,8);
 		testResultsTextView.append("\nMove blue 10 (6,8) to red 11 (7,8)");
 
-		MovePiece move25 = new MovePiece(this,4,1,3,1);
-		game.sendAction(move25);
+		firstInstance.movePieceAction(4,1,3,1);
 		testResultsTextView.append("\nMove red 9 (4,1) to blue 5 (3,1)");
 
-		MovePiece move26 = new MovePiece(this,4,9,7,9);
-		game.sendAction(move26);
+		firstInstance.movePieceAction(4,9,7,9);
 		testResultsTextView.append("\nMove blue 2 (4,9) to red 0 (7,9), CAPTURED FLAG");
+
+		firstInstance.setGamePhase(2);
 
 		testResultsTextView.append("\nBLUE WINS\n");
 
@@ -203,7 +176,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		String fstCpy = firstCopy.toString();
 		String secCpy = secondCopy.toString();
 
-		String gme = game.toString();
+		String gme = firstInstance.toString();
 
 		// if the copies are identical, we append the strings to the TextView
 		if(fstCpy.equals(secCpy)) {

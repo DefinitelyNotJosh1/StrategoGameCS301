@@ -15,7 +15,7 @@ package edu.up.cs301.Stratego;
 public class Piece {
     private int pieceNumber; // 0-11, 0 is flag, 11 is bomb
     private int isVisible; // could be unnecessary, not using it for now
-    private char team; // made it a char so we don't have to worry about deep
+    private int team; // made it a char so we don't have to worry about deep
                        // copying - 'B' blue, 'R' red
     private boolean isLake;
 
@@ -28,7 +28,7 @@ public class Piece {
 
 
     //basic piece constructor
-    public Piece(int pieceNumber, char team) {
+    public Piece(int pieceNumber, int team) {
         this.pieceNumber = pieceNumber;
         this.team = team;
         this.isLake = false;
@@ -43,7 +43,7 @@ public class Piece {
     public int getPieceNumber() {return pieceNumber;}
     public int getIsVisible() {return isVisible;}
     public void setIsVisible(int vis) {isVisible = vis;}
-    public char getTeam() {return team;}
+    public int getTeam() {return team;}
     public boolean isLake() {
         return isLake;
     }

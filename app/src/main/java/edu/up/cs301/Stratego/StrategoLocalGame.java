@@ -61,27 +61,18 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
+		/*
 		int playerId = gameState.getPlayerId(); // which ID the player is
 
 		if (action instanceof Ready) {
 			if (gameState.getGamePhase() != 0) { // ready action unavailable during game
 				return false;
 			}
-			switch (playerId) {
-				case 0:
-					gameState.setIsBlueReady(true);
-					break;
-				case 1:
-					gameState.setIsRedReady(true);
-					break;
-			}
-			if (gameState.getIsBlueReady() && gameState.getIsRedReady()) {
-				gameState.setGamePhase(1); // if both players are ready, update gamePhase
-			}
+			gameState.readyAction(playerId);
 			return true;
 		}
 		else if (action instanceof Quit) {
-				gameState.setGamePhase(2);
+				gameState.quitAction();
 				return true;
 		}
 		else if (action instanceof MovePiece) {
@@ -92,134 +83,13 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			int col = mp.getCol();
 			int destRow = mp.getDestRow();
 			int destCol = mp.getDestCol();
-			Piece piece = gameState.getPiece(row,col); // now returns Piece instead of int
-			int pieceVal = 0;
-			char pieceTeam = 'L';
-			if (piece != null) {
-				pieceVal = piece.getPieceNumber(); // we can get value of that Piece here (also need to use Piece object later)
-				pieceTeam = gameState.getTeam(row,col);
+
+			return gameState.movePieceAction(row,col,destRow,destCol);
 			}
 
-			Piece targetedPiece = gameState.getPiece(destRow,destCol);
-			int targetedPieceVal = 0;
-			char destTeam = 'L';
-
-			if (targetedPiece != null) {
-				targetedPieceVal = targetedPiece.getPieceNumber();
-				destTeam = gameState.getTeam(destRow,destCol);
-			}
-
-			if (targetedPiece != null && targetedPiece.isLake()) { // return false if player is trying to move into a lake
-				return false;
-			}
-			if (targetedPiece != null) {
-
-			}
-			//return false if player is trying to move an opponent's piece
-			if (pieceTeam == 'B' && playerId == 1) {
-				return false;
-			}
-			if (pieceTeam == 'R' && playerId == 0) {
-				return false;
-			}
-
-
-			//return false if out of bounds
-			if (destRow >= gameState.board.length || destCol >= gameState.board[row].length) return false;
-			if (destRow < 0 || destCol < 0) return false;
-
-			//return false if targeted piece is on the same team
-			if (destTeam == pieceTeam) {
-				return false;
-			}
-
-			//return false if flag or bomb
-			if (pieceVal == 0 || pieceVal == 11) {
-				return false;
-			}
-
-			//return false if the destination spot is illegal for most pieces
-			if (pieceVal != 2) {
-				if (!((Math.abs(destRow - row) == 1 && destCol == col) ||
-						(Math.abs(destCol - col) == 1 && destRow == row))) {
-					return false;
-				}
-			}
-
-			//return false if destination area is illegal for a scout
-			if (pieceVal == 2) {
-				// Check if the move is horizontal
-				if (row == destRow) {
-					// Check if moving right
-					if (col < destCol) {
-						for (int tempCol = col + 1; tempCol < destCol; tempCol++) {
-							if (gameState.board[row][col] != null) {
-								return false; // Obstacle found in the path
-							}
-						}
-					}
-					// Check if moving left
-					else {
-						for (int tempCol = col - 1; tempCol > destCol; tempCol--) {
-							if (gameState.board[row][col] != null) {
-								return false; // Obstacle found in the path
-							}
-						}
-					}
-				}
-
-
-				// Check if the move is vertical
-				else if (col == destCol) {
-					// Check if moving down
-					if (row < destRow) {
-						for (int tempRow = row + 1; tempRow < destRow; tempRow++) {
-							if (gameState.board[row][col] != null) {
-								return false; // Obstacle found in the path
-							}
-						}
-					}
-					// Check if moving up
-					else {
-						for (int tempRow = row - 1; tempRow > destRow; tempRow--) {
-							if (gameState.board[row][col] != null) {
-								return false; // Obstacle found in the path
-							}
-						}
-					}
-				}
-				//no obstacles found, interaction can proceed
-			}
-
-
-			if (gameState.board[row][col] == null) { // move piece if spot is empty
-				gameState.setPiece(destRow, destCol, row, col);
-				return true;
-			}
-			else if (pieceVal > targetedPieceVal) { // if attacker is greater, take previous piece
-				gameState.capturePiece(playerId,targetedPiece);
-				gameState.setPiece(destRow,destCol,row,col);
-				return true;
-			}
-			else if (targetedPieceVal > pieceVal) { // delete piece that attacked if its opponent is greater
-				if (targetedPieceVal == 10 && pieceVal == 1) { // if a spy is attacking a 10
-					gameState.capturePiece(playerId,targetedPiece);
-					gameState.setPiece(destRow,destCol,row,col);
-					return true;
-				}
-				else if (targetedPieceVal == 11 && pieceVal == 3) { // if a miner is attacking a bomb
-					gameState.capturePiece(playerId,targetedPiece);
-					gameState.setPiece(destRow,destCol,row,col);
-					return true;
-				}
-				else { // attacking piece loses
-					gameState.capturePiece(Math.abs(playerId - 1),piece);
-					gameState.setPiece(row, col, row, col);
-					return true;
-				}
-			}
-		}
+		 */
 		return false;
+
 	}//makeMove
 	
 	/**
