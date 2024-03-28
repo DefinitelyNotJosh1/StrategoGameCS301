@@ -61,7 +61,6 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
-		/*
 		int playerId = gameState.getPlayerId(); // which ID the player is
 
 		if (action instanceof Ready) {
@@ -87,7 +86,7 @@ public class StrategoLocalGame extends LocalGame implements Serializable {
 			return gameState.movePieceAction(row,col,destRow,destCol);
 			}
 
-		 */
+
 		return false;
 
 	}//makeMove

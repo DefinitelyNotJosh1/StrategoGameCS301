@@ -176,7 +176,7 @@ public class StrategoHumanPlayer extends GameHumanPlayer implements OnClickListe
 		String fstCpy = firstCopy.toString();
 		String secCpy = secondCopy.toString();
 
-		String gme = firstInstance.toString();
+		String gme = firstInstance.toString(); // check the first instance game data
 
 		// if the copies are identical, we append the strings to the TextView
 		if(fstCpy.equals(secCpy)) {

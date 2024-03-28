@@ -385,9 +385,9 @@ public class StrategoState extends GameState {
 			for (int col = 0; col < board[row].length; col++) {
 				if (board[row][col] == null) {
 					continue;
-				} else if (board[row][col].getTeam() == 'B') {
+				} else if (board[row][col].getTeam() == 0) {
 					aliveBluePieces++;
-				} else if (board[row][col].getTeam() == 'R') {
+				} else if (board[row][col].getTeam() == 1) {
 					aliveRedPieces++;
 				}
 			}
